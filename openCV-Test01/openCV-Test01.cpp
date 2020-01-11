@@ -9,33 +9,40 @@ int main()
 {
 	String text = "Funny text inside the box";
 	text = format("Hello OpenCV %s", CV_VERSION);
-	int fontFace = FONT_HERSHEY_COMPLEX;
-	double fontScale = 2;
-	int thickness = 3;
+	for(int var = FONT_HERSHEY_SIMPLEX; var <= FONT_HERSHEY_SCRIPT_COMPLEX;var++)
+	{
+		int fontFace = var;
+		double fontScale = 2;
+		int thickness = 3;
 
-	Mat img(600, 800, CV_8UC3, Scalar::all(0));
+		Mat img(600, 800, CV_8UC3, Scalar::all(0));
 
-	int baseline = 0;
-	Size textSize = getTextSize(text, fontFace,
-		fontScale, thickness, &baseline);
-	baseline += thickness;
+		int baseline = 0;
+		Size textSize = getTextSize(text, fontFace,
+			fontScale, thickness, &baseline);
+		baseline += thickness;
 
-	// center the text
-	Point textOrg((img.cols - textSize.width) / 2,
-		(img.rows + textSize.height) / 2);
+		// center the text
+		Point textOrg((img.cols - textSize.width) / 2,
+			(img.rows + textSize.height) / 2);
 
-	// draw the box
-	rectangle(img, textOrg + Point(0, baseline),
-		textOrg + Point(textSize.width, -textSize.height),
-		Scalar(0, 0, 255));
-	// ... and the baseline first
-	line(img, textOrg + Point(0, thickness),
-		textOrg + Point(textSize.width, thickness),
-		Scalar(0, 0, 255));
+		// draw the box
+		rectangle(img, textOrg + Point(0, baseline),
+			textOrg + Point(textSize.width, -textSize.height),
+			Scalar(0, 0, 255));
+		// ... and the baseline first
+		line(img, textOrg + Point(0, thickness),
+			textOrg + Point(textSize.width, thickness),
+			Scalar(0, 0, 255));
 
-	// then put the text itself
-	putText(img, text, textOrg, fontFace, fontScale,
-		Scalar::all(255), thickness, 8);
-	imshow("TestImg", img);
-	waitKey();
+		// then put the text itself
+		putText(img, text, textOrg, fontFace, fontScale,
+			Scalar::all(255), thickness, 8);
+		String title;
+		title = format("字体编号%d",var);
+		imshow(title, img);
+		waitKey();
+		destroyWindow(title);
+	}
+	return 0;
 }

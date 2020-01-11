@@ -5,7 +5,6 @@
   <PropertyGroup>
     <IncludePath>$(SolutionDir)install\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)install\x64\vc15\lib;$(LibraryPath)</LibraryPath>
-    <ExecutablePath>E:\VS2017Pro\chengmeng2018\openCVExample\install\x64\vc15\bin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
